@@ -1,0 +1,54 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { ui } from '../../../i18n/ui.js';
+import { getNotes, fmtDate, ytEmbed } from '../../../lib/microcms.js';
+
+export async function getStaticPaths() {
+  const notes = await getNotes();
+  const paths = [];
+  for (const lang of ['ja', 'en']) {
+    for (const note of notes) {
+      paths.push({ params: { lang, slug: note.slug }, props: { note } });
+    }
+  }
+  return paths;
+}
+const { lang } = Astro.params;
+const { note } = Astro.props;
+const t = ui[lang];
+const title = lang === 'ja' ? note.titleJa : note.titleEn;
+const body = lang === 'ja' ? note.bodyJa : note.bodyEn;
+const video = lang === 'ja' ? note.mainVideoJa : note.mainVideoEn;
+const embed = ytEmbed(video);
+---
+<Base lang={lang} page="notes" altPath={`notes/${note.slug}`} title={`${title} — Nari-Aki Gunji`}>
+  <div class="wrap sec-pad">
+    <a class="back" href={`/${lang}/notes/`}><span class="ar"></span><span>{t.notes.back}</span></a>
+    <div class="article">
+      <div class="article-head">
+        <div class="amono">{fmtDate(note.noteDate)} · {t.notes.studioNote}</div>
+        <h1>{title}</h1>
+      </div>
+
+      {embed ? (
+        <div class="frame mainvid"><iframe src={embed} title={title} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      ) : (
+        <div class="frame mainvid">
+          <div class="grid-tex"></div>
+          <div class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z" fill="#1B1A17"/></svg></div>
+          <div class="flabel">▶ {t.notes.mainVideo}</div>
+          <div class="fcorner"><svg class="reg" viewBox="0 0 14 14"><line x1="0" y1="7" x2="14" y2="7"/><line x1="7" y1="0" x2="7" y2="14"/><circle cx="7" cy="7" r="4"/></svg></div>
+        </div>
+      )}
+
+      <div class="prose" set:html={body}></div>
+    </div>
+  </div>
+</Base>
+
+<style is:global>
+  .mainvid iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  /* microCMS rich-text media sit naturally in the prose column */
+  .prose img { width: 100%; height: auto; border: 1px solid var(--hairline); margin: 32px 0; }
+  .prose iframe { width: 100%; aspect-ratio: 16/9; border: 1px solid var(--hairline); margin: 32px 0; }
+</style>

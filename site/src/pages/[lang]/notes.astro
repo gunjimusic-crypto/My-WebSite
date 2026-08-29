@@ -1,0 +1,42 @@
+---
+import Base from '../../layouts/Base.astro';
+import { ui } from '../../i18n/ui.js';
+import { getNotes, fmtDate, excerpt } from '../../lib/microcms.js';
+export function getStaticPaths() {
+  return [{ params: { lang: 'ja' } }, { params: { lang: 'en' } }];
+}
+const { lang } = Astro.params;
+const t = ui[lang];
+const notes = await getNotes();
+---
+<Base lang={lang} page="notes" title={t.meta.notesTitle}>
+  <div class="wrap sec-pad">
+    <div class="eyebrow">{t.notes.eyebrow}</div>
+    {notes.length === 0 ? (
+      <p style="color:var(--graphite)">{t.notes.empty}</p>
+    ) : (
+      <div class="note-list">
+        {notes.map((note, i) => {
+          const title = lang === 'ja' ? note.titleJa : note.titleEn;
+          const body = lang === 'ja' ? note.bodyJa : note.bodyEn;
+          const num = String(notes.length - i).padStart(2, '0');
+          return (
+            <a class="note-item" href={`/${lang}/notes/${note.slug}/`}>
+              <div class="note-thumb">
+                {note.thumbnail && note.thumbnail.url
+                  ? <img src={note.thumbnail.url} alt={title} style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+                  : <Fragment><div class="grid-tex"></div><div class="pin"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z" fill="#1B1A17"/></svg></div></Fragment>}
+              </div>
+              <div class="note-c">
+                <div class="note-date mono-sm">{fmtDate(note.noteDate)}</div>
+                <h3>{title}</h3>
+                <p>{excerpt(body)}</p>
+              </div>
+              <div class="note-idx">NOTE {num}</div>
+            </a>
+          );
+        })}
+      </div>
+    )}
+  </div>
+</Base>

@@ -1,0 +1,69 @@
+---
+import '../styles/global.css';
+import { ui, other } from '../i18n/ui.js';
+const { lang, page = '', title, altPath } = Astro.props;
+const t = ui[lang];
+const o = other(lang);
+const switchSlug = altPath !== undefined ? altPath : page;
+const nav = [
+  { key: 'home', slug: '' },
+  { key: 'works', slug: 'works' },
+  { key: 'bio', slug: 'bio' },
+  { key: 'contact', slug: 'contact' },
+  { key: 'notes', slug: 'notes' }
+];
+const href = (l, slug) => `/${l}/${slug ? slug + '/' : ''}`;
+---
+<!doctype html>
+<html lang={lang}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=Space+Mono:wght@400;700&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <div class="wrap bar">
+      <a class="brand" href={href(lang, '')}>
+        <span class="mark">NARI-AKI GU<b>N</b>JI</span>
+        <span class="role kicker-sm">{t.role}</span>
+      </a>
+      <nav>
+        {nav.map((item) => (
+          <a class:list={['navlink', { 'is-active': item.slug === page }]} href={href(lang, item.slug)}>{t.nav[item.key]}</a>
+        ))}
+      </nav>
+      <div class="lang">
+        <a class:list={['', { on: lang === 'ja' }]} href={href('ja', switchSlug)}>JA</a><span>/</span><a class:list={['', { on: lang === 'en' }]} href={href('en', switchSlug)}>EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <slot />
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <span class="fbrand">NARI-AKI GU<b>N</b>JI</span>
+      <span class="fcoords mono-sm">© 2024 — nari-aki.com</span>
+      <span class="fsoc">
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.4-.8-2c-.75-.8-1.6-.8-2-.85C16 4.1 12 4.1 12 4.1s-4 0-6.8.25c-.4.05-1.25.05-2 .85-.6.6-.8 2-.8 2S2.4 8.85 2.4 10.5v1.4c0 1.65.2 3.3.2 3.3s.2 1.4.8 2c.75.8 1.75.75 2.2.85 1.6.15 6.4.2 6.4.2s4 0 6.8-.25c.4-.05 1.25-.05 2-.85.6-.6.8-2 .8-2s.2-1.65.2-3.3v-1.4c0-1.65-.2-3.3-.2-3.3zM9.9 14V9l4.35 2.5L9.9 14z"/></svg></a>
+        <a href="#" aria-label="Spotify"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm4.6 14.4a.62.62 0 01-.86.2c-2.35-1.44-5.3-1.76-8.8-.96a.62.62 0 11-.28-1.22c3.82-.87 7.1-.5 9.73 1.12.3.18.4.57.2.86zm1.23-2.74a.78.78 0 01-1.07.26c-2.68-1.65-6.77-2.13-9.94-1.17a.78.78 0 11-.45-1.5c3.62-1.08 8.12-.55 11.2 1.34.36.22.48.7.26 1.07zm.1-2.85C14.8 8.96 9.5 8.78 6.4 9.72a.94.94 0 11-.54-1.8c3.56-1.08 9.4-.87 13.1 1.32a.94.94 0 01-.96 1.62z"/></svg></a>
+        <a href="#" aria-label="Apple Music"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 3c-1 .06-2.17.68-2.86 1.5-.62.72-1.15 1.8-.95 2.84 1.1.04 2.22-.6 2.9-1.42.63-.77 1.1-1.83.9-2.92zM18.5 12.6c.03-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.42-.14-2.76.83-3.48.83-.71 0-1.82-.81-2.99-.79-1.54.02-2.96.9-3.75 2.27-1.6 2.78-.41 6.9 1.15 9.16.76 1.1 1.67 2.35 2.86 2.3 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.72 1.23-.02 2.01-1.12 2.76-2.24.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.65z"/></svg></a>
+      </span>
+    </div>
+  </footer>
+</body>
+</html>
+
+<style is:global>
+  /* anchor-based nav/lang (the draft used <button>; here they are links) */
+  .navlink{display:inline-block;text-decoration:none}
+  .lang a{background:none;border:0;cursor:pointer;color:var(--mist);padding:4px 5px;transition:color .2s;text-decoration:none}
+  .lang a.on{color:var(--ink)}
+  .brand{text-decoration:none}
+</style>

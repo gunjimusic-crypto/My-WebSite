@@ -1,0 +1,40 @@
+---
+import Base from '../../layouts/Base.astro';
+import { ui } from '../../i18n/ui.js';
+export function getStaticPaths() {
+  return [{ params: { lang: 'ja' } }, { params: { lang: 'en' } }];
+}
+const { lang } = Astro.params;
+const t = ui[lang];
+const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>';
+const links = [
+  { n: '01', label: 'YouTube', href: '#' },
+  { n: '02', label: 'Spotify', href: '#' },
+  { n: '03', label: 'Apple Music', href: '#' },
+  { n: '04', label: 'X / Twitter', href: '#' }
+];
+---
+<Base lang={lang} page="bio" title={t.meta.bioTitle}>
+  <div class="wrap sec-pad">
+    <div class="eyebrow">{t.bio.eyebrow}</div>
+    <div class="bio-grid">
+      <div class="portrait">
+        <div class="ptex"></div>
+        <div class="pn mono-sm">{t.bio.portrait}</div>
+      </div>
+      <div class="bio-body">
+        <h2>{t.bio.h2}</h2>
+        <p>{t.bio.p1}</p>
+        <p class="dim">{t.bio.p2}</p>
+        <div class="links">
+          {links.map((l) => (
+            <a class="link-row" href={l.href}>
+              <span class="lk-name"><span class="mono">{l.n}</span><span class="lk-label">{l.label}</span></span>
+              <span class="lk-ext"><Fragment set:html={arrow} /></span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</Base>

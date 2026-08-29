@@ -1,0 +1,31 @@
+---
+import Base from '../../layouts/Base.astro';
+import { ui } from '../../i18n/ui.js';
+export function getStaticPaths() {
+  return [{ params: { lang: 'ja' } }, { params: { lang: 'en' } }];
+}
+const { lang } = Astro.params;
+const t = ui[lang];
+// Replace with the real address. Split for light bot obfuscation.
+const MAIL_USER = 'contact';
+const MAIL_DOMAIN = 'nari-aki.com';
+---
+<Base lang={lang} page="contact" title={t.meta.contactTitle}>
+  <div class="wrap">
+    <div class="contact-wrap">
+      <svg class="reg tl" viewBox="0 0 14 14"><line x1="0" y1="7" x2="14" y2="7"/><line x1="7" y1="0" x2="7" y2="14"/><circle cx="7" cy="7" r="4"/></svg>
+      <svg class="reg br" viewBox="0 0 14 14"><line x1="0" y1="7" x2="14" y2="7"/><line x1="7" y1="0" x2="7" y2="14"/><circle cx="7" cy="7" r="4"/></svg>
+      <div class="eyebrow" style="justify-content:center">{t.contact.eyebrow}</div>
+      <p class="contact-lead">{t.contact.lead}</p>
+      <span class="maillink" id="mail" data-user={MAIL_USER} data-domain={MAIL_DOMAIN}>{MAIL_USER}<span class="at">[at]</span>{MAIL_DOMAIN}</span>
+      <div class="contact-note kicker-sm">{t.contact.note}</div>
+    </div>
+  </div>
+</Base>
+
+<script>
+  const mail = document.getElementById('mail');
+  if (mail) mail.addEventListener('click', () => {
+    window.location.href = 'mailto:' + mail.getAttribute('data-user') + '@' + mail.getAttribute('data-domain');
+  });
+</script>

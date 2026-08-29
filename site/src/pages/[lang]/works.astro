@@ -1,0 +1,125 @@
+---
+import Base from '../../layouts/Base.astro';
+import { ui } from '../../i18n/ui.js';
+import { solo, comm, undisclosed } from '../../data/works.js';
+import { albumArt } from '../../scripts/art.js';
+
+export function getStaticPaths() {
+  return [{ params: { lang: 'ja' } }, { params: { lang: 'en' } }];
+}
+const { lang } = Astro.params;
+const t = ui[lang];
+
+// global album index across solo + commissioned (used as data-al)
+const soloItems = solo.map((w, i) => ({ w, ai: i }));
+const commItems = comm.map((w, i) => ({ w, ai: solo.length + i }));
+
+const YT = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.4-.8-2c-.75-.8-1.6-.8-2-.85C16 4.1 12 4.1 12 4.1s-4 0-6.8.25c-.4.05-1.25.05-2 .85-.6.6-.8 2-.8 2S2.4 8.85 2.4 10.5v1.4c0 1.65.2 3.3.2 3.3s.2 1.4.8 2c.75.8 1.75.75 2.2.85 1.6.15 6.4.2 6.4.2s4 0 6.8-.25c.4-.05 1.25-.05 2-.85.6-.6.8-2 .8-2s.2-1.65.2-3.3v-1.4c0-1.65-.2-3.3-.2-3.3zM9.9 14V9l4.35 2.5L9.9 14z"/></svg>';
+const SP = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm4.6 14.4a.62.62 0 01-.86.2c-2.35-1.44-5.3-1.76-8.8-.96a.62.62 0 11-.28-1.22c3.82-.87 7.1-.5 9.73 1.12.3.18.4.57.2.86zm1.23-2.74a.78.78 0 01-1.07.26c-2.68-1.65-6.77-2.13-9.94-1.17a.78.78 0 11-.45-1.5c3.62-1.08 8.12-.55 11.2 1.34.36.22.48.7.26 1.07zm.1-2.85C14.8 8.96 9.5 8.78 6.4 9.72a.94.94 0 11-.54-1.8c3.56-1.08 9.4-.87 13.1 1.32a.94.94 0 01-.96 1.62z"/></svg>';
+const AM = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 3c-1 .06-2.17.68-2.86 1.5-.62.72-1.15 1.8-.95 2.84 1.1.04 2.22-.6 2.9-1.42.63-.77 1.1-1.83.9-2.92zM18.5 12.6c.03-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.42-.14-2.76.83-3.48.83-.71 0-1.82-.81-2.99-.79-1.54.02-2.96.9-3.75 2.27-1.6 2.78-.41 6.9 1.15 9.16.76 1.1 1.67 2.35 2.86 2.3 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.72 1.23-.02 2.01-1.12 2.76-2.24.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.65z"/></svg>';
+const REG = '<svg class="reg" viewBox="0 0 14 14"><line x1="0" y1="7" x2="14" y2="7"/><line x1="7" y1="0" x2="7" y2="14"/><circle cx="7" cy="7" r="4"/></svg>';
+const PLATFORMS = '<div class="platforms"><a class="plat" href="#" aria-label="YouTube" title="YouTube">' + YT + '</a><a class="plat" href="#" aria-label="Spotify" title="Spotify">' + SP + '</a><a class="plat" href="#" aria-label="Apple Music" title="Apple Music">' + AM + '</a></div>';
+---
+<Base lang={lang} page="works" title={t.meta.worksTitle}>
+  <div class="wrap sec-pad">
+    <div class="eyebrow">{t.works.eyebrow}</div>
+
+    <div class="tabs">
+      <button class="tab on" data-tab="solo"><span class="idx">01</span><span>{t.works.tabSolo}</span></button>
+      <button class="tab" data-tab="commission"><span class="idx">02</span><span>{t.works.tabComm}</span></button>
+    </div>
+
+    <div class="tabpane on" data-pane="solo">
+      <div class="albums">
+        {soloItems.map(({ w, ai }) => (
+          <article class="album">
+            <div class="album-media" data-al={ai}>
+              <Fragment set:html={albumArt(w.seed)} />
+              <div class="video-layer"><div class="grid-tex"></div><div class="vlabel">VIDEO — YouTube</div></div>
+              <div class="np"><span class="eq big"><i></i><i></i><i></i></span><span class="np-title"></span></div>
+              <div class="mcorner"><Fragment set:html={REG} /></div>
+              <div class="mhint"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z" fill="#1B1A17"/></svg></div>
+              <div class="transport">
+                <span class="tp-btn"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z" fill="#1B1A17"/></svg></span>
+                <span class="tp-time cur">0:00</span>
+                <span class="tp-bar"><span class="tp-fill"></span></span>
+                <span class="tp-time dur">0:00</span>
+              </div>
+            </div>
+            <div class="album-head"><span class="album-title">{w.title}</span><span class="album-year">{w.year}</span></div>
+            <div class="album-sub">
+              <span class="album-cat">{w.cat[lang]}</span>
+              {w.noLinks ? <span class="selfhost kicker-sm">{t.works.selfHost}</span> : <Fragment set:html={PLATFORMS} />}
+            </div>
+            <ol class="tracklist">
+              {w.tracks.map((tr, ti) => (
+                <li class="track" data-al={ai} data-tk={ti} data-media={tr.media} data-dur={tr.dur} data-src={tr.src || ''}>
+                  <span class="tk-num">{tr.n}</span>
+                  <span class="tk-play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z" fill="#5E5C55"/></svg></span>
+                  <span class="tk-title"><span>{tr.t[lang]}</span>{tr.media === 'video' && <span class="vtag">{t.works.videoTag}</span>}</span>
+                  <span class="tk-dur">{tr.dur}</span>
+                </li>
+              ))}
+            </ol>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <div class="tabpane" data-pane="commission">
+      <div class="albums">
+        {commItems.map(({ w, ai }) => (
+          <article class="album">
+            <div class="album-media" data-al={ai}>
+              <Fragment set:html={albumArt(w.seed)} />
+              <div class="video-layer"><div class="grid-tex"></div><div class="vlabel">VIDEO — YouTube</div></div>
+              <div class="np"><span class="eq big"><i></i><i></i><i></i></span><span class="np-title"></span></div>
+              <div class="mcorner"><Fragment set:html={REG} /></div>
+              <div class="mhint"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z" fill="#1B1A17"/></svg></div>
+              <div class="transport">
+                <span class="tp-btn"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z" fill="#1B1A17"/></svg></span>
+                <span class="tp-time cur">0:00</span>
+                <span class="tp-bar"><span class="tp-fill"></span></span>
+                <span class="tp-time dur">0:00</span>
+              </div>
+            </div>
+            <div class="album-head"><span class="album-title">{w.title}</span><span class="album-year">{w.year}</span></div>
+            <div class="album-sub">
+              <span class="album-cat">{w.cat[lang]}</span>
+              {w.noLinks ? <span class="selfhost kicker-sm">{t.works.selfHost}</span> : <Fragment set:html={PLATFORMS} />}
+            </div>
+            <ol class="tracklist">
+              {w.tracks.map((tr, ti) => (
+                <li class="track" data-al={ai} data-tk={ti} data-media={tr.media} data-dur={tr.dur} data-src={tr.src || ''}>
+                  <span class="tk-num">{tr.n}</span>
+                  <span class="tk-play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z" fill="#5E5C55"/></svg></span>
+                  <span class="tk-title"><span>{tr.t[lang]}</span>{tr.media === 'video' && <span class="vtag">{t.works.videoTag}</span>}</span>
+                  <span class="tk-dur">{tr.dur}</span>
+                </li>
+              ))}
+            </ol>
+          </article>
+        ))}
+      </div>
+
+      <div class="undisclosed">
+        <div class="eyebrow">{t.works.undiscHead}</div>
+        <p style="color:var(--graphite);font-size:14px;max-width:52ch;margin-bottom:8px">{t.works.undiscDesc}</p>
+        <div class="ud-grid">
+          {undisclosed.map((u) => (
+            <div class="ud-item">
+              <div class="ud-thumb"><span class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="11" width="14" height="9" rx="1"/><path d="M8 11V8a4 4 0 018 0v3"/></svg></span></div>
+              <div class="ud-name">{t.works.undiscName}</div>
+              <div class="ud-tag kicker-sm">{u.tag[lang]} · {u.y}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</Base>
+
+<script>
+  import { initWorks } from '../../scripts/player.js';
+  initWorks();
+</script>
