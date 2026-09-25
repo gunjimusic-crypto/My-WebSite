@@ -8,6 +8,7 @@ export const solo = [
     title: 'Queen Of Joker: Battle Themes',
     year: '2026',
     seed: 'queen-of-joker',
+    cover: '/covers/queen-of-joker.jpg',
     cat: { ja: 'ゲーム音楽 / EP', en: 'Game soundtrack / EP' },
     links: {
       apple: 'https://music.apple.com/jp/album/queen-of-joker-battle-themes-single/6807057679',

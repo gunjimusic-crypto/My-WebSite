@@ -42,7 +42,7 @@ function platformsFor(w) {
         {soloItems.map(({ w, ai }) => (
           <article class="album">
             <div class="album-media" data-al={ai}>
-              <Fragment set:html={albumArt(w.seed)} />
+              {w.cover ? <img class="cover" src={w.cover} alt={w.title} loading="lazy" /> : <Fragment set:html={albumArt(w.seed)} />}
               <div class="video-layer"><div class="grid-tex"></div><div class="vlabel">VIDEO — YouTube</div></div>
               <div class="np"><span class="eq big"><i></i><i></i><i></i></span><span class="np-title"></span></div>
               <div class="mcorner"><Fragment set:html={REG} /></div>
@@ -52,6 +52,8 @@ function platformsFor(w) {
                 <span class="tp-time cur">0:00</span>
                 <span class="tp-bar"><span class="tp-fill"></span></span>
                 <span class="tp-time dur">0:00</span>
+                <button class="tp-mute" aria-label="Mute"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="wave" d="M16 9a4 4 0 010 6"/></svg></button>
+                <input class="tp-vol" type="range" min="0" max="100" value="80" aria-label="Volume" />
               </div>
             </div>
             <div class="album-head"><span class="album-title">{w.title}</span><span class="album-year">{w.year}</span></div>
@@ -80,7 +82,7 @@ function platformsFor(w) {
           {commItems.map(({ w, ai }) => (
             <article class="album">
               <div class="album-media" data-al={ai}>
-                <Fragment set:html={albumArt(w.seed)} />
+                {w.cover ? <img class="cover" src={w.cover} alt={w.title} loading="lazy" /> : <Fragment set:html={albumArt(w.seed)} />}
                 <div class="video-layer"><div class="grid-tex"></div><div class="vlabel">VIDEO — YouTube</div></div>
                 <div class="np"><span class="eq big"><i></i><i></i><i></i></span><span class="np-title"></span></div>
                 <div class="mcorner"><Fragment set:html={REG} /></div>

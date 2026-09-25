@@ -1,35 +1,31 @@
 // All user-facing UI strings, per locale.
+// The site currently runs English-only (see src/pages/index.astro + the hidden
+// language switch in Base.astro). The Japanese (ja) strings below are kept
+// up to date so Japanese can be switched back on later without rewriting copy.
 export const locales = ['ja', 'en'];
 
 export const ui = {
   ja: {
     meta: {
-      homeTitle: 'Nari-Aki Gunji — 作曲家',
+      homeTitle: 'Nari-Aki Gunji — 作曲家・編曲家',
       worksTitle: '作品 — Nari-Aki Gunji',
       bioTitle: 'バイオグラフィー — Nari-Aki Gunji',
       contactTitle: 'コンタクト — Nari-Aki Gunji',
       notesTitle: 'ノート — Nari-Aki Gunji'
     },
-    role: '作曲家',
+    role: '作曲家・編曲家',
     nav: { home: 'ホーム', works: '作品', bio: 'バイオ', contact: 'コンタクト', notes: 'ノート' },
     hero: {
-      sub: '作曲家。商業音楽の現場で研鑽を積みながら、映像・空間・身体と結びつく音楽を制作している。',
-      tags: ['作曲', 'サウンドデザイン', '空間音響'],
+      subLines: ['構築美と無機的なサウンド。', '流麗な和声と有機的な旋律。'],
+      tags: ['オーケストラ', 'IDM', 'Math Rock', '実験音楽'],
       portrait: 'PORTRAIT — 1:1'
     },
     artPlate: 'PL. 02 — untitled study, mixed media',
     bioLead: {
-      eyebrow: 'バイオグラフィー',
-      h2: '図面を引くように、音を組む。',
-      p: '郡司成明は東京を拠点に活動する作曲家。同人音楽での制作から始まり、映像への楽曲提供を経て、商業音楽の現場で研鑽を積んでいる。',
+      eyebrow: 'バイオ',
+      h2: '構築と有機のあいだで。',
+      p: '郡司ナリアキ — 東京を拠点に、オーケストラから電子音楽・実験音楽までを横断する作曲家・編曲家。',
       link: 'プロフィールを読む'
-    },
-    featured: {
-      kicker: '最新のノート — 解説・余談',
-      h2: '音の設計図について ― 制作ノート 01',
-      p: 'ひとつの曲がどんな“図面”から立ち上がっていくのか。最新作を題材に、短い動画で顔を出して話しました。',
-      link: 'ノートを読む',
-      videoLabel: '▶ メイン動画 — 顔出し解説'
     },
     works: {
       eyebrow: '作品 — Portfolio',
@@ -42,9 +38,12 @@ export const ui = {
     },
     bio: {
       eyebrow: 'バイオグラフィー',
-      h2: '図面を引くように、音を組む。',
-      p1: '郡司成明は東京を拠点に活動する作曲家。同人音楽での制作からキャリアを始め、映像作品への楽曲提供を経て、現在は商業音楽の現場で研鑽を積んでいる。',
-      p2: 'その一方で、前衛的な響きや空間・身体と結びつく音楽を自主制作として探求している。〔ここに経歴・受賞歴・参加作品などを追記〕',
+      name: 'Nari-Aki Gunji',
+      agePrefix: '', ageSuffix: '歳',
+      metaBorn: ' · 2004.04.15 栃木県生まれ',
+      p1: '郡司ナリアキは東京を拠点に活動する作曲家・編曲家。',
+      p2: '東京理科大学で数学を学ぶかたわら、2023年に作曲を開始。個人制作のアニメーションやショートドラマの作編曲を経て、2024年に株式会社Team-MAXで高梨康治（『フェアリーテイル』『NARUTO』等）に師事し、『ゾンビランドサガ』『ブループロトコル：スターレゾナンス』『異世界のんびり農家』などの音楽制作に参加。',
+      p3: '2026年に独立。現在は個人の芸術活動を軸に、実験音楽やオーケストラ・吹奏楽作品、インディーゲームへの楽曲提供などを手がけている。',
       portrait: 'PORTRAIT — 4:5'
     },
     contact: {
@@ -62,32 +61,25 @@ export const ui = {
   },
   en: {
     meta: {
-      homeTitle: 'Nari-Aki Gunji — Composer',
+      homeTitle: 'Nari-Aki Gunji — Composer / Arranger',
       worksTitle: 'Works — Nari-Aki Gunji',
       bioTitle: 'Biography — Nari-Aki Gunji',
       contactTitle: 'Contact — Nari-Aki Gunji',
       notesTitle: 'Notes — Nari-Aki Gunji'
     },
-    role: 'Composer',
+    role: 'Composer / Arranger',
     nav: { home: 'Home', works: 'Works', bio: 'Bio', contact: 'Contact', notes: 'Notes' },
     hero: {
-      sub: 'Composer. Building a practice at the intersection of image, space, and the body, while working across commercial music.',
-      tags: ['Composition', 'Sound design', 'Spatial audio'],
+      subLines: ['Architectural beauty, inorganic texture.', 'Flowing harmony, organic melody.'],
+      tags: ['Orchestral', 'IDM', 'Math Rock', 'Experimental'],
       portrait: 'PORTRAIT — 1:1'
     },
     artPlate: 'PL. 02 — untitled study, mixed media',
     bioLead: {
       eyebrow: 'About',
-      h2: 'Composing sound the way one drafts a plan.',
-      p: 'Nari-Aki Gunji is a Tokyo-based composer — from independent music, through scoring for image, to honing his craft in commercial production.',
+      h2: 'Between the constructed and the organic.',
+      p: 'Nari-Aki Gunji — a Tokyo-based composer and arranger working across orchestral, electronic, and experimental music.',
       link: 'Read the full bio'
-    },
-    featured: {
-      kicker: 'Latest note — commentary',
-      h2: 'On drawing sound ― Studio notes 01',
-      p: 'How a single piece rises from its blueprint. A short talk to camera, using a recent work as the case study.',
-      link: 'Read the note',
-      videoLabel: '▶ Main video — to camera'
     },
     works: {
       eyebrow: 'Works — Portfolio',
@@ -100,9 +92,12 @@ export const ui = {
     },
     bio: {
       eyebrow: 'Biography',
-      h2: 'Composing sound the way one drafts a plan.',
-      p1: 'Nari-Aki Gunji is a Tokyo-based composer. Starting out in independent music and scoring for animation, he now hones his craft across commercial music production.',
-      p2: 'Alongside this, his self-directed work explores avant-garde sound and music tied to space and the body. [Add credits, awards, and selected works here.]',
+      name: 'Nari-Aki Gunji',
+      agePrefix: 'Age ', ageSuffix: '',
+      metaBorn: ' · Born 2004.04.15 · Tochigi, Japan',
+      p1: 'Nari-Aki Gunji is a composer and arranger based in Tokyo, Japan.',
+      p2: 'While studying mathematics at Tokyo University of Science, he began composing in 2023 — writing and arranging for independent animation and short dramas. In 2024 he joined Team-MAX, studying under Yasuharu Takanashi (known for Fairy Tail and Naruto), and took part in the music production for titles including Zombie Land Saga, Blue Protocol: Star Resonance, and Farming Life in Another World.',
+      p3: 'Since becoming independent from Team-MAX in 2026, he has centered his practice on his own artistic work — experimental music and pieces for orchestra and wind ensemble, alongside music for indie games.',
       portrait: 'PORTRAIT — 4:5'
     },
     contact: {

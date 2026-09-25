@@ -19,13 +19,16 @@ const links = [
     <div class="eyebrow">{t.bio.eyebrow}</div>
     <div class="bio-grid">
       <div class="portrait">
-        <div class="ptex"></div>
-        <div class="pn mono-sm">{t.bio.portrait}</div>
+        <img class="portrait-img" src="/photos/portrait.jpg" alt="Nari-Aki Gunji" />
       </div>
       <div class="bio-body">
-        <h2>{t.bio.h2}</h2>
+        <div class="bio-head">
+          <h2 class="bio-name">{t.bio.name}</h2>
+          <div class="bio-meta mono-sm"><span id="bio-age" data-prefix={t.bio.agePrefix} data-suffix={t.bio.ageSuffix}></span>{t.bio.metaBorn}</div>
+        </div>
         <p>{t.bio.p1}</p>
-        <p class="dim">{t.bio.p2}</p>
+        <p>{t.bio.p2}</p>
+        <p>{t.bio.p3}</p>
         <div class="links">
           {links.map((l) => (
             <a class="link-row" href={l.href}>
@@ -38,3 +41,14 @@ const links = [
     </div>
   </div>
 </Base>
+
+<script>
+  // Auto-calculate age from date of birth (2004-04-15) so it never goes stale.
+  var dob = new Date(2004, 3, 15);
+  var now = new Date();
+  var age = now.getFullYear() - dob.getFullYear();
+  var m = now.getMonth() - dob.getMonth();
+  if (m < 0 || (m === 0 && now.getDate() < dob.getDate())) age--;
+  var el = document.getElementById('bio-age');
+  if (el) el.textContent = (el.dataset.prefix || '') + age + (el.dataset.suffix || '');
+</script>

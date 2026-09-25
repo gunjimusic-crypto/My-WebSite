@@ -24,6 +24,19 @@ export function initWorks() {
   var state = { al: -1, tk: -1, playing: false, ct: 0, dur: 0 };
   var raf = null, lastTs = 0, audioEl = new Audio();
   var scrub = { active: false, bar: null };
+  var vol = 0.8;
+  audioEl.volume = vol;
+  function syncVol() {
+    var pct = Math.round(vol * 100);
+    document.querySelectorAll('.tp-vol').forEach(function (s) { if (document.activeElement !== s) s.value = pct; });
+    document.querySelectorAll('.tp-mute').forEach(function (b) { b.classList.toggle('muted', audioEl.muted || vol === 0); });
+  }
+  document.addEventListener('input', function (e) {
+    var s = e.target.closest('.tp-vol'); if (!s) return;
+    vol = Math.max(0, Math.min(1, (+s.value) / 100));
+    audioEl.muted = false; audioEl.volume = vol;
+    syncVol();
+  });
 
   function mediaEl(ai) { return document.querySelector('.album-media[data-al="' + ai + '"]'); }
   function trackEl(ai, ti) { return document.querySelector('.track[data-al="' + ai + '"][data-tk="' + ti + '"]'); }
@@ -132,7 +145,9 @@ export function initWorks() {
   document.addEventListener('pointercancel', endScrub);
 
   document.addEventListener('click', function (e) {
-    if (e.target.closest('.tp-bar')) return;
+    if (e.target.closest('.tp-bar') || e.target.closest('.tp-vol')) return;
+    var mute = e.target.closest('.tp-mute');
+    if (mute) { audioEl.muted = !audioEl.muted; syncVol(); return; }
     var btn = e.target.closest('.tp-btn');
     if (btn) { if (state.tk >= 0) togglePlay(); return; }
     var tk = e.target.closest('.track');
@@ -140,4 +155,6 @@ export function initWorks() {
     var media = e.target.closest('.album-media');
     if (media) { var aid = +media.getAttribute('data-al'); playTrack(aid, (state.al === aid && state.tk >= 0) ? state.tk : 0); return; }
   });
+
+  syncVol();
 }
