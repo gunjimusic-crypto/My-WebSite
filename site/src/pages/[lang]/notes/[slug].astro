@@ -6,7 +6,7 @@ import { getNotes, fmtDate, ytEmbed } from '../../../lib/microcms.js';
 export async function getStaticPaths() {
   const notes = await getNotes();
   const paths = [];
-  for (const lang of ['ja', 'en']) {
+  for (const lang of ['en']) {
     for (const note of notes) {
       paths.push({ params: { lang, slug: note.slug }, props: { note } });
     }

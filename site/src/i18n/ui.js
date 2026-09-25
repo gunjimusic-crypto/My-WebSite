@@ -7,14 +7,15 @@ export const locales = ['ja', 'en'];
 export const ui = {
   ja: {
     meta: {
-      homeTitle: 'Nari-Aki Gunji — 作曲家・編曲家',
+      homeTitle: 'Nari-Aki Gunji — Official Website',
       worksTitle: '作品 — Nari-Aki Gunji',
       bioTitle: 'バイオグラフィー — Nari-Aki Gunji',
       contactTitle: 'コンタクト — Nari-Aki Gunji',
-      notesTitle: 'ノート — Nari-Aki Gunji'
+      notesTitle: 'ノート — Nari-Aki Gunji',
+      shopTitle: 'ショップ — Nari-Aki Gunji'
     },
     role: '作曲家・編曲家',
-    nav: { home: 'ホーム', works: '作品', bio: 'バイオ', contact: 'コンタクト', notes: 'ノート' },
+    nav: { home: 'ホーム', works: '作品', shop: 'ショップ', bio: 'バイオ', contact: 'コンタクト', notes: 'ノート' },
     hero: {
       subLines: ['構築美と無機的なサウンド。', '流麗な和声と有機的な旋律。'],
       tags: ['オーケストラ', 'IDM', 'Math Rock', '実験音楽'],
@@ -22,9 +23,9 @@ export const ui = {
     },
     artPlate: 'PL. 02 — untitled study, mixed media',
     bioLead: {
-      eyebrow: 'バイオ',
-      h2: '構築と有機のあいだで。',
-      p: '郡司ナリアキ — 東京を拠点に、オーケストラから電子音楽・実験音楽までを横断する作曲家・編曲家。',
+      eyebrow: 'プロフィール',
+      h2: 'Nari-Aki Gunji について',
+      p: '東京を拠点に、オーケストラから電子音楽・実験音楽までを横断する作曲家・編曲家。',
       link: 'プロフィールを読む'
     },
     works: {
@@ -57,18 +58,26 @@ export const ui = {
       studioNote: '制作ノート',
       mainVideo: 'メイン動画',
       empty: 'まだノートはありません。'
+    },
+    shop: {
+      eyebrow: 'ショップ',
+      h2: 'Stems & MIDI',
+      p: '選りすぐりの楽曲のマルチトラック（Stem）とMIDIデータを Gumroad で配布しています。',
+      cta: 'Gumroad のショップを見る',
+      note: '新しいタブで Gumroad が開きます'
     }
   },
   en: {
     meta: {
-      homeTitle: 'Nari-Aki Gunji — Composer / Arranger',
+      homeTitle: 'Nari-Aki Gunji — Official Website',
       worksTitle: 'Works — Nari-Aki Gunji',
       bioTitle: 'Biography — Nari-Aki Gunji',
       contactTitle: 'Contact — Nari-Aki Gunji',
-      notesTitle: 'Notes — Nari-Aki Gunji'
+      notesTitle: 'Notes — Nari-Aki Gunji',
+      shopTitle: 'Shop — Nari-Aki Gunji'
     },
     role: 'Composer / Arranger',
-    nav: { home: 'Home', works: 'Works', bio: 'Bio', contact: 'Contact', notes: 'Notes' },
+    nav: { home: 'Home', works: 'Works', shop: 'Shop', bio: 'Bio', contact: 'Contact', notes: 'Notes' },
     hero: {
       subLines: ['Architectural beauty, inorganic texture.', 'Flowing harmony, organic melody.'],
       tags: ['Orchestral', 'IDM', 'Math Rock', 'Experimental'],
@@ -76,9 +85,9 @@ export const ui = {
     },
     artPlate: 'PL. 02 — untitled study, mixed media',
     bioLead: {
-      eyebrow: 'About',
-      h2: 'Between the constructed and the organic.',
-      p: 'Nari-Aki Gunji — a Tokyo-based composer and arranger working across orchestral, electronic, and experimental music.',
+      eyebrow: 'Profile',
+      h2: 'About Nari-Aki Gunji',
+      p: 'A Tokyo-based composer and arranger working across orchestral, electronic, and experimental music.',
       link: 'Read the full bio'
     },
     works: {
@@ -111,6 +120,13 @@ export const ui = {
       studioNote: 'Studio notes',
       mainVideo: 'Main video',
       empty: 'No notes yet.'
+    },
+    shop: {
+      eyebrow: 'Shop',
+      h2: 'Stems & MIDI',
+      p: 'Multitrack stems and MIDI data from selected works — available for download on Gumroad.',
+      cta: 'Visit the shop on Gumroad',
+      note: 'Opens Gumroad in a new tab'
     }
   }
 };

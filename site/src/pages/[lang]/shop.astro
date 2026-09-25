@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+import { ui } from '../../i18n/ui.js';
+export function getStaticPaths() {
+  return [{ params: { lang: 'en' } }];
+}
+const { lang } = Astro.params;
+const t = ui[lang];
+// TODO: replace with the real Gumroad store URL when ready.
+const SHOP_URL = 'https://gumroad.com/';
+---
+<Base lang={lang} page="shop" title={t.meta.shopTitle}>
+  <div class="wrap">
+    <div class="shop-wrap">
+      <svg class="reg tl" viewBox="0 0 14 14"><line x1="0" y1="7" x2="14" y2="7"/><line x1="7" y1="0" x2="7" y2="14"/><circle cx="7" cy="7" r="4"/></svg>
+      <svg class="reg br" viewBox="0 0 14 14"><line x1="0" y1="7" x2="14" y2="7"/><line x1="7" y1="0" x2="7" y2="14"/><circle cx="7" cy="7" r="4"/></svg>
+      <div class="eyebrow" style="justify-content:center">{t.shop.eyebrow}</div>
+      <h2 class="shop-h2">{t.shop.h2}</h2>
+      <p class="shop-lead">{t.shop.p}</p>
+      <a class="shop-cta" href={SHOP_URL} target="_blank" rel="noopener">
+        <span>{t.shop.cta}</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+      </a>
+      <div class="shop-note kicker-sm">{t.shop.note}</div>
+    </div>
+  </div>
+</Base>

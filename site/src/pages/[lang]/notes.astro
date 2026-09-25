@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import { ui } from '../../i18n/ui.js';
 import { getNotes, fmtDate, excerpt } from '../../lib/microcms.js';
 export function getStaticPaths() {
-  return [{ params: { lang: 'ja' } }, { params: { lang: 'en' } }];
+  return [{ params: { lang: 'en' } }];
 }
 const { lang } = Astro.params;
 const t = ui[lang];

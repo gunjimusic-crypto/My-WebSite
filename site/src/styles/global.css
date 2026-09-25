@@ -54,7 +54,8 @@
   .navlink::after{content:"";position:absolute;left:11px;right:11px;bottom:2px;height:1px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
   .navlink.is-active{color:var(--ink)}
   .navlink.is-active::after{transform:scaleX(1)}
-  @media(max-width:780px){nav{gap:0}.navlink{padding:8px 7px;font-size:10px;letter-spacing:.1em}}
+  @media(max-width:780px){nav{gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;flex-wrap:nowrap}nav::-webkit-scrollbar{display:none}.navlink{padding:8px 7px;font-size:10px;letter-spacing:.08em;white-space:nowrap;flex:0 0 auto}}
+  @media(max-width:480px){.bar{gap:8px}.brand .mark{font-size:15px}}
   .lang{display:flex;align-items:center;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;flex-shrink:0;margin-left:6px}
   .lang button{background:none;border:0;cursor:pointer;color:var(--mist);padding:4px 5px;transition:color .2s}
   .lang button.on{color:var(--ink)}
@@ -269,6 +270,18 @@
   .maillink::after{content:"";position:absolute;left:0;right:100%;bottom:-6px;height:1px;background:var(--ink);transition:right .45s ease}
   .maillink:hover::after{right:0}
   .contact-note{margin-top:34px}
+
+  /* ---------- shop ---------- */
+  .shop-wrap{position:relative;text-align:center;padding:clamp(60px,12vw,150px) 0}
+  .shop-wrap .reg.tl{position:absolute;top:24px;left:0}
+  .shop-wrap .reg.br{position:absolute;bottom:24px;right:0}
+  .shop-h2{font-family:var(--font-display);font-weight:300;font-size:clamp(30px,6vw,60px);letter-spacing:-.01em;margin-bottom:22px}
+  .shop-lead{color:var(--graphite);max-width:46ch;margin:0 auto 40px;font-size:16px;line-height:1.9}
+  .shop-cta{display:inline-flex;align-items:center;gap:12px;padding:15px 26px;border:1px solid var(--ink);font-family:var(--font-body);font-weight:500;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);transition:color .25s,border-color .25s,background .25s}
+  .shop-cta svg{width:15px;height:15px;transition:transform .3s}
+  .shop-cta:hover{color:var(--red);border-color:var(--red)}
+  .shop-cta:hover svg{transform:translate(3px,-3px)}
+  .shop-note{margin-top:26px}
 
   /* ---------- notes list ---------- */
   .note-list{border-top:1px solid var(--hairline);margin-top:8px}

@@ -8,9 +8,10 @@ const switchSlug = altPath !== undefined ? altPath : page;
 const nav = [
   { key: 'home', slug: '' },
   { key: 'works', slug: 'works' },
+  { key: 'shop', slug: 'shop' },
   { key: 'bio', slug: 'bio' },
-  { key: 'contact', slug: 'contact' },
-  { key: 'notes', slug: 'notes' }
+  { key: 'notes', slug: 'notes' },
+  { key: 'contact', slug: 'contact' }
 ];
 const href = (l, slug) => `/${l}/${slug ? slug + '/' : ''}`;
 ---
