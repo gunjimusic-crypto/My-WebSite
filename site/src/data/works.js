@@ -16,8 +16,8 @@ export const solo = [
       youtube: 'https://music.youtube.com/search?q=%E9%83%A1%E5%8F%B8%E3%83%8A%E3%83%AA%E3%82%A2%E3%82%AD+Queen+Of+Joker%3A+Battle+Themes'
     },
     tracks: [
-      { n: '01', t: { ja: 'Unchained Fenrir', en: 'Unchained Fenrir' }, dur: '3:21', media: 'audio', src: '' },
-      { n: '02', t: { ja: 'The Waltz of Fenrir', en: 'The Waltz of Fenrir' }, dur: '2:28', media: 'audio', src: '' }
+      { n: '01', t: { ja: 'Unchained Fenrir', en: 'Unchained Fenrir' }, dur: '3:21', media: 'audio', src: '/audio/unchained-fenrir.mp3' },
+      { n: '02', t: { ja: 'The Waltz of Fenrir', en: 'The Waltz of Fenrir' }, dur: '2:28', media: 'audio', src: '/audio/the-waltz-of-fenrir.mp3' }
     ]
   }
 ];

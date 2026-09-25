@@ -8,10 +8,9 @@ const { lang } = Astro.params;
 const t = ui[lang];
 const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>';
 const links = [
-  { n: '01', label: 'YouTube', href: '#' },
-  { n: '02', label: 'Spotify', href: '#' },
-  { n: '03', label: 'Apple Music', href: '#' },
-  { n: '04', label: 'X / Twitter', href: '#' }
+  { n: '01', label: 'YouTube', href: 'https://www.youtube.com/@Nari-AkiGunji' },
+  { n: '02', label: 'Spotify', href: 'https://open.spotify.com/artist/3FK6iLnzDLq6eujj004c4s' },
+  { n: '03', label: 'Apple Music', href: 'https://music.apple.com/jp/artist/%E9%83%A1%E5%8F%B8%E3%83%8A%E3%83%AA%E3%82%A2%E3%82%AD/6807027182' }
 ];
 ---
 <Base lang={lang} page="bio" title={t.meta.bioTitle}>
@@ -31,7 +30,7 @@ const links = [
         <p>{t.bio.p3}</p>
         <div class="links">
           {links.map((l) => (
-            <a class="link-row" href={l.href}>
+            <a class="link-row" href={l.href} target="_blank" rel="noopener">
               <span class="lk-name"><span class="mono">{l.n}</span><span class="lk-label">{l.label}</span></span>
               <span class="lk-ext"><Fragment set:html={arrow} /></span>
             </a>

@@ -1,10 +1,31 @@
 ---
 import '../styles/global.css';
 import { ui, other } from '../i18n/ui.js';
-const { lang, page = '', title, altPath } = Astro.props;
+const { lang, page = '', title, altPath, description } = Astro.props;
 const t = ui[lang];
 const o = other(lang);
 const switchSlug = altPath !== undefined ? altPath : page;
+
+// --- SEO ---
+const SITE = 'https://nari-aki.com';
+const canonical = new URL(Astro.url.pathname, SITE).href;
+const metaDesc = description || 'Nari-Aki Gunji (郡司ナリアキ / ぐんじなりあき) — composer and arranger based in Tokyo, Japan. Orchestral, electronic and experimental music, and music for anime, games and film.';
+const ogImage = new URL('/photos/portrait.jpg', SITE).href;
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Nari-Aki Gunji',
+  alternateName: ['郡司ナリアキ', 'ぐんじなりあき'],
+  jobTitle: 'Composer / Arranger',
+  url: SITE + '/',
+  image: ogImage,
+  address: { '@type': 'PostalAddress', addressLocality: 'Tokyo', addressCountry: 'JP' },
+  sameAs: [
+    'https://www.youtube.com/@Nari-AkiGunji',
+    'https://open.spotify.com/artist/3FK6iLnzDLq6eujj004c4s',
+    'https://music.apple.com/jp/artist/%E9%83%A1%E5%8F%B8%E3%83%8A%E3%83%AA%E3%82%A2%E3%82%AD/6807027182'
+  ]
+};
 const nav = [
   { key: 'home', slug: '' },
   { key: 'works', slug: 'works' },
@@ -21,6 +42,20 @@ const href = (l, slug) => `/${l}/${slug ? slug + '/' : ''}`;
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
+  <meta name="description" content={metaDesc} />
+  <link rel="canonical" href={canonical} />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Nari-Aki Gunji" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={metaDesc} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={metaDesc} />
+  <meta name="twitter:image" content={ogImage} />
+  <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=Space+Mono:wght@400;700&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap" rel="stylesheet" />
