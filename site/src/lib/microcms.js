@@ -41,17 +41,19 @@ const SAMPLE = [
 ];
 
 export async function getNotes() {
-  if (!DOMAIN || !KEY) return SAMPLE;
+  // No sample notes on the live site: show real microCMS notes only.
+  // Until a note is published in microCMS, the Notes page is intentionally empty.
+  if (!DOMAIN || !KEY) return [];
   try {
     const res = await fetch(
       `https://${DOMAIN}.microcms.io/api/v1/notes?limit=100&orders=-noteDate`,
       { headers: { 'X-MICROCMS-API-KEY': KEY } }
     );
-    if (!res.ok) return SAMPLE;
+    if (!res.ok) return [];
     const data = await res.json();
-    return (data && data.contents && data.contents.length) ? data.contents : SAMPLE;
+    return (data && data.contents) ? data.contents : [];
   } catch (e) {
-    return SAMPLE;
+    return [];
   }
 }
 

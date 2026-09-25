@@ -1,18 +1,16 @@
 ---
-// Static root. Redirects the visitor to /ja/ or /en/ based on their browser
-// language, client-side. <noscript> and meta-refresh fall back to /ja/.
+// Static root. English-only for now: always send visitors to /en/.
+// To restore browser-language routing later, swap the redirect back to the
+// version that checks navigator.language and sends "ja" users to /ja/.
 ---
 <!doctype html>
-<html lang="ja">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="refresh" content="0; url=/ja/" />
+  <meta http-equiv="refresh" content="0; url=/en/" />
   <title>Nari-Aki Gunji</title>
   <script is:inline>
-    (function () {
-      var l = (navigator.language || 'ja').toLowerCase();
-      location.replace(l.indexOf('ja') === 0 ? '/ja/' : '/en/');
-    })();
+    location.replace('/en/');
   </script>
 </head>
 <body></body>

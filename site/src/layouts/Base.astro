@@ -36,9 +36,11 @@ const href = (l, slug) => `/${l}/${slug ? slug + '/' : ''}`;
           <a class:list={['navlink', { 'is-active': item.slug === page }]} href={href(lang, item.slug)}>{t.nav[item.key]}</a>
         ))}
       </nav>
+      {/* Language switch hidden while the site is English-only. Re-enable to bring Japanese back.
       <div class="lang">
         <a class:list={['', { on: lang === 'ja' }]} href={href('ja', switchSlug)}>JA</a><span>/</span><a class:list={['', { on: lang === 'en' }]} href={href('en', switchSlug)}>EN</a>
       </div>
+      */}
     </div>
   </header>
 
