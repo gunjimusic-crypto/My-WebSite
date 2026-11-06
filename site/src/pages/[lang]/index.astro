@@ -60,7 +60,7 @@ const t = ui[lang];
 
   <a class="biolead" href={`/${lang}/bio/`}>
     <div class="wrap biolead-in">
-      <div class="biolead-art" id="biolead-art"></div>
+      <div class="biolead-art"><img src="/photos/portrait.jpg" alt="Nari-Aki Gunji" /></div>
       <div class="biolead-txt">
         <div class="eyebrow">{t.bioLead.eyebrow}</div>
         <h2>{t.bioLead.h2}</h2>
@@ -69,13 +69,22 @@ const t = ui[lang];
       </div>
     </div>
   </a>
-  {/* Latest-note block hidden until real notes are published in microCMS. */}
+
+  <a class="biolead" href={`/${lang}/notes/`}>
+    <div class="wrap biolead-in">
+      <div class="biolead-art"><img src="/photos/notes.jpg" alt="Nari-Aki Gunji — Notes" /></div>
+      <div class="biolead-txt">
+        <div class="eyebrow">{t.notesLead.eyebrow}</div>
+        <h2>{t.notesLead.h2}</h2>
+        <p>{t.notesLead.p}</p>
+        <span class="link-more">{t.notesLead.link}<span class="ar"></span></span>
+      </div>
+    </div>
+  </a>
 </Base>
 
 <script>
-  import { albumArt, populateArtband, initReveal } from '../../scripts/art.js';
-  const bl = document.getElementById('biolead-art');
-  if (bl) bl.innerHTML = albumArt('about-nari');
+  import { populateArtband, initReveal } from '../../scripts/art.js';
   populateArtband();
   initReveal('#artband');
 </script>

@@ -28,6 +28,12 @@ export const ui = {
       p: '東京を拠点に、オーケストラから電子音楽・実験音楽までを横断する作曲家・編曲家。',
       link: 'プロフィールを読む'
     },
+    notesLead: {
+      eyebrow: 'ノート',
+      h2: 'ノート',
+      p: '楽曲の解説やエッセイ、制作の裏側についての覚書。',
+      link: 'ノートを読む'
+    },
     works: {
       eyebrow: '作品 — Portfolio',
       tabSolo: '個人制作', tabComm: '委嘱作品',
@@ -89,6 +95,12 @@ export const ui = {
       h2: 'About Nari-Aki Gunji',
       p: 'A Tokyo-based composer and arranger working across orchestral, electronic, and experimental music.',
       link: 'Read the full bio'
+    },
+    notesLead: {
+      eyebrow: 'Notes',
+      h2: 'Notes',
+      p: 'Commentary, essays, and notes on selected works and the process behind them.',
+      link: 'Read the notes'
     },
     works: {
       eyebrow: 'Works — Portfolio',
